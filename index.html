@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CHRONOS - Timeless Precision</title>
+    <title>AEON - Eternal Timepieces</title>
     <style>
         * {
             margin: 0;
@@ -12,327 +12,912 @@
         }
 
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background: #000;
-            color: #fff;
+            font-family: 'Georgia', serif;
+            background: #0a0a0a;
+            color: #e8e8e8;
             overflow-x: hidden;
         }
 
-        .nav {
+        /* Navigation */
+        header {
             position: fixed;
-            top: 0;
             width: 100%;
+            padding: 1.5rem 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 2rem 5%;
             z-index: 1000;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
+            background: linear-gradient(180deg, rgba(10, 10, 10, 0.95) 0%, transparent 100%);
+            transition: all 0.3s;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 300;
-            letter-spacing: 4px;
+        header.scrolled {
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 1rem 8%;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 3rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #dc2626;
-        }
-
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-bg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 50%, rgba(220, 38, 38, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 50%, rgba(37, 99, 235, 0.1) 0%, transparent 50%);
-            animation: pulse 8s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        .hero-content {
-            text-align: center;
-            z-index: 1;
-            animation: fadeIn 1.5s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .hero-title {
-            font-size: 5rem;
-            font-weight: 100;
-            letter-spacing: 12px;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #fff 0%, #dc2626 50%, #2563eb 100%);
+        .brand {
+            font-size: 2rem;
+            font-weight: 400;
+            letter-spacing: 8px;
+            background: linear-gradient(90deg, #d4af37, #f4d03f);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .hero-subtitle {
-            font-size: 1.2rem;
-            font-weight: 300;
-            letter-spacing: 4px;
-            color: #999;
-            margin-bottom: 3rem;
+        nav ul {
+            display: flex;
+            gap: 4rem;
+            list-style: none;
         }
 
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 3rem;
-            background: transparent;
-            border: 1px solid #dc2626;
-            color: #fff;
+        nav a {
+            color: #e8e8e8;
             text-decoration: none;
+            font-size: 0.85rem;
             letter-spacing: 3px;
-            font-size: 0.9rem;
-            transition: all 0.3s;
+            text-transform: uppercase;
             position: relative;
+            transition: color 0.3s;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, #d4af37, #f4d03f);
+            transition: width 0.3s;
+        }
+
+        nav a:hover {
+            color: #d4af37;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             overflow: hidden;
         }
 
-        .cta-button::before {
-            content: '';
+        .hero-video-bg {
             position: absolute;
             top: 0;
-            left: -100%;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, #dc2626, #2563eb);
-            transition: left 0.3s;
-            z-index: -1;
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgba(212, 175, 55, 0.15) 0%, transparent 40%),
+                radial-gradient(ellipse at 80% 70%, rgba(139, 69, 19, 0.1) 0%, transparent 40%),
+                #000;
+            animation: bgShift 15s ease-in-out infinite;
         }
 
-        .cta-button:hover::before {
-            left: 0;
+        @keyframes bgShift {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.05) rotate(1deg); }
         }
 
-        .cta-button:hover {
-            border-color: #2563eb;
-        }
-
-        .watch-display {
-            padding: 8rem 5%;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 4rem;
-            background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);
-        }
-
-        .watch-card {
+        .hero-content {
             position: relative;
-            padding: 3rem 2rem;
-            border: 1px solid #222;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            padding: 0 2rem;
+            animation: heroFadeIn 2s ease-out;
+        }
+
+        @keyframes heroFadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(50px) scale(0.95);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .hero h1 {
+            font-size: 6.5rem;
+            font-weight: 300;
+            letter-spacing: 20px;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            text-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+        }
+
+        .hero-tagline {
+            font-size: 1.4rem;
+            letter-spacing: 6px;
+            color: #b8b8b8;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .hero-description {
+            font-size: 1rem;
+            color: #888;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            letter-spacing: 1px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: 1.2rem 3.5rem;
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            color: #000;
+            text-decoration: none;
+            letter-spacing: 3px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.6);
+        }
+
+        .btn-secondary {
+            padding: 1.2rem 3.5rem;
+            background: transparent;
+            border: 2px solid #d4af37;
+            color: #d4af37;
+            text-decoration: none;
+            letter-spacing: 3px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all 0.4s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(212, 175, 55, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        .scroll-indicator::after {
+            content: '↓';
+            font-size: 2rem;
+            color: #d4af37;
+        }
+
+        /* Collection Section */
+        .collection {
+            padding: 10rem 8%;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+
+        .section-title {
+            font-size: 4rem;
+            font-weight: 300;
+            letter-spacing: 12px;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #d4af37, #f4d03f, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            to { background-position: 200% center; }
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #888;
+            letter-spacing: 2px;
+            font-style: italic;
+        }
+
+        .watches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-bottom: 5rem;
+        }
+
+        .watch-item {
+            background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+            padding: 3rem 2.5rem;
+            border: 1px solid #2a2a2a;
+            position: relative;
+            overflow: hidden;
             transition: all 0.5s;
             cursor: pointer;
         }
 
-        .watch-card::before {
+        .watch-item::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(37, 99, 235, 0.1));
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
             opacity: 0;
             transition: opacity 0.5s;
         }
 
-        .watch-card:hover {
-            border-color: #dc2626;
-            transform: translateY(-10px);
+        .watch-item:hover {
+            border-color: #d4af37;
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.2);
         }
 
-        .watch-card:hover::before {
+        .watch-item:hover::before {
             opacity: 1;
         }
 
-        .watch-card-content {
+        .watch-content {
             position: relative;
             z-index: 1;
         }
 
-        .watch-icon {
-            width: 80px;
-            height: 80px;
+        .watch-image {
+            width: 120px;
+            height: 120px;
             margin: 0 auto 2rem;
+            background: radial-gradient(circle, #d4af37 0%, transparent 70%);
             border-radius: 50%;
-            border: 2px solid #dc2626;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-        }
-
-        .watch-name {
-            font-size: 1.5rem;
-            letter-spacing: 3px;
-            margin-bottom: 1rem;
-            font-weight: 300;
-        }
-
-        .watch-desc {
-            color: #999;
-            line-height: 1.8;
-            font-size: 0.9rem;
-        }
-
-        .features {
-            padding: 8rem 5%;
-            text-align: center;
-        }
-
-        .section-title {
             font-size: 3rem;
-            font-weight: 100;
-            letter-spacing: 8px;
-            margin-bottom: 5rem;
+            border: 3px solid #d4af37;
+            animation: rotate 10s linear infinite;
         }
 
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            max-width: 1200px;
-            margin: 0 auto;
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        .feature-item {
-            padding: 2rem;
+        .watch-item:hover .watch-image {
+            animation-play-state: paused;
         }
 
-        .feature-number {
-            font-size: 3rem;
-            font-weight: 100;
-            color: #dc2626;
+        .watch-title {
+            font-size: 1.8rem;
+            letter-spacing: 4px;
             margin-bottom: 1rem;
-        }
-
-        .feature-text {
-            color: #999;
-            line-height: 1.6;
-        }
-
-        .footer {
-            padding: 4rem 5%;
             text-align: center;
-            border-top: 1px solid #222;
-            color: #666;
-            font-size: 0.9rem;
+            color: #d4af37;
+        }
+
+        .watch-price {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #888;
+            margin-bottom: 1.5rem;
             letter-spacing: 2px;
         }
 
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 3rem;
+        .watch-details {
+            color: #999;
+            line-height: 1.9;
+            font-size: 0.95rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .watch-specs {
+            display: flex;
+            justify-content: space-around;
+            padding-top: 1.5rem;
+            border-top: 1px solid #2a2a2a;
+        }
+
+        .spec {
+            text-align: center;
+        }
+
+        .spec-value {
+            font-size: 1.5rem;
+            color: #d4af37;
+            font-weight: 600;
+        }
+
+        .spec-label {
+            font-size: 0.75rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.3rem;
+        }
+
+        /* Heritage Section */
+        .heritage {
+            padding: 10rem 8%;
+            background: #000;
+            position: relative;
+        }
+
+        .heritage-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .heritage-text h2 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: 8px;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        .heritage-text p {
+            font-size: 1.1rem;
+            line-height: 2;
+            color: #b8b8b8;
+            margin-bottom: 2rem;
+        }
+
+        .heritage-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+            border: 1px solid #2a2a2a;
+            transition: all 0.3s;
+        }
+
+        .stat-box:hover {
+            border-color: #d4af37;
+            transform: scale(1.05);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            color: #d4af37;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #888;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .heritage-visual {
+            position: relative;
+            height: 600px;
+        }
+
+        .heritage-circle {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border: 2px solid #d4af37;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse-circle 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse-circle {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.5;
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        .heritage-circle:nth-child(2) {
+            width: 300px;
+            height: 300px;
+            animation-delay: 1s;
+        }
+
+        .heritage-circle:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            animation-delay: 2s;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.2), transparent);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 10rem 8%;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: rgba(26, 26, 26, 0.5);
+            padding: 3rem;
+            border-left: 3px solid #d4af37;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .testimonial-card:hover {
+            background: rgba(26, 26, 26, 0.8);
+            transform: translateX(10px);
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #b8b8b8;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-author {
+            font-size: 1rem;
+            color: #d4af37;
+            letter-spacing: 2px;
+        }
+
+        .testimonial-role {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .quote-icon {
+            font-size: 4rem;
+            color: rgba(212, 175, 55, 0.2);
+            position: absolute;
+            top: 1rem;
+            right: 2rem;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            padding: 8rem 8%;
+            background: #000;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-size: 3rem;
+            font-weight: 300;
+            letter-spacing: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .newsletter p {
+            font-size: 1.1rem;
+            color: #888;
+            margin-bottom: 3rem;
+        }
+
+        .newsletter-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 1.2rem 2rem;
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid #2a2a2a;
+            color: #e8e8e8;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: #d4af37;
+            background: rgba(26, 26, 26, 1);
+        }
+
+        .newsletter-form button {
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            border: none;
+            color: #000;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            padding: 5rem 8% 3rem;
+            background: #000;
+            border-top: 1px solid #2a2a2a;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+            color: #d4af37;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #d4af37;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #2a2a2a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: #888;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            border-color: #d4af37;
+            color: #d4af37;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #2a2a2a;
+            color: #666;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 968px) {
+            .hero h1 {
+                font-size: 4rem;
+                letter-spacing: 10px;
+            }
+
+            nav ul {
+                gap: 2rem;
+            }
+
+            .heritage-content {
+                grid-template-columns: 1fr;
+            }
+
+            .watches-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2.5rem;
                 letter-spacing: 6px;
             }
-            
-            .nav-links {
-                gap: 1.5rem;
+
+            .brand {
+                font-size: 1.5rem;
+                letter-spacing: 4px;
             }
-            
-            .section-title {
-                font-size: 2rem;
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <nav class="nav">
-        <div class="logo">TIMELESS</div>
-        <ul class="nav-links">
-            <li><a href="#collection">COLLECTION</a></li>
-            <li><a href="#craft">CRAFT</a></li>
-            <li><a href="#contact">CONTACT</a></li>
-        </ul>
-    </nav>
+    <header id="header">
+        <div class="brand">AEON</div>
+        <nav>
+            <ul>
+                <li><a href="#collection">Timepieces</a></li>
+                <li><a href="#heritage">Heritage</a></li>
+                <li><a href="#testimonials">Stories</a></li>
+                <li><a href="#contact">Connect</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <section class="hero">
-        <div class="hero-bg"></div>
+        <div class="hero-video-bg"></div>
         <div class="hero-content">
-            <h1 class="hero-title">CHRONOS</h1>
-            <p class="hero-subtitle">PRECISION IN EVERY SECOND</p>
-            <a href="#collection" class="cta-button">EXPLORE</a>
+            <h1>AEON</h1>
+            <p class="hero-tagline">Where Time Becomes Art</p>
+            <p class="hero-description">Handcrafted masterpieces that capture the essence of eternity. Each timepiece tells a story of precision, passion, and timeless elegance.</p>
+            <div class="hero-buttons">
+                <a href="#collection" class="btn-primary">Discover Collection</a>
+                <a href="#heritage" class="btn-secondary">Our Legacy</a>
+            </div>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <section id="collection" class="collection">
+        <div class="section-header">
+            <h2 class="section-title">MASTERPIECES</h2>
+            <p class="section-subtitle">Curated for the Discerning Connoisseur</p>
+        </div>
+
+        <div class="watches-grid">
+            <div class="watch-item">
+                <div class="watch-content">
+                    <div class="watch-image">⦿</div>
+                    <h3 class="watch-title">IMPERIAL</h3>
+                    <p class="watch-price">$24,500</p>
+                    <p class="watch-details">18K rose gold case with hand-guilloché dial. Swiss tourbillon movement with perpetual calendar and moon phase complication.</p>
+                    <div class="watch-specs">
+                        <div class="spec">
+                            <div class="spec-value">42mm</div>
+                            <div class="spec-label">Diameter</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-value">80h</div>
+                            <div class="spec-label">Power Reserve</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-value">50m</div>
+                            <div class="spec-label">Water Resist</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="watch-item">
+                <div class="watch-content">
+                    <div class="watch-image">◉</div>
+                    <h3 class="watch-title">QUANTUM</h3>
+                    <p class="watch-price">$18,900</p>
+                    <p class="watch-details">Titanium-carbon composite with sapphire caseback. Self-winding chronograph with tachymeter scale and date function.</p>
+                    <div class="watch-specs">
+                        <div class="spec">
+                            <div class="spec-value">44mm</div>
+                            <div class="spec-label">Diameter</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-value">68h</div>
+                            <div class="spec-label">Power Reserve</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-value">200m</div>
+                            <div class="spec-label">Water Resist</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="watch-item">
+                <div class="watch-content">
+                    <div class="watch-image">◎</div>
+                    <h3 class="watch-title">SOVEREIGN</h3>
+                    <p class="watch-price">$32,000</p>
+                    <p class="watch-details">Platinum case with meteorite dial. Limited edition of 88 pieces. Minute repeater with Westminster chime and jumping hour.</p>
+                    <div class="watch-specs">
+                        <div class="spec">
+                            <div class="spec-value">40mm</div>
+                            <div class="spec-label">Diameter</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-value">90h</div>
+                            <div class="spec-label">Power Reserve</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-value">30m</div>
+                            <div class="spec-label">Water Resist</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="collection" class="watch-display">
-        <div class="watch-card">
-            <div class="watch-card-content">
-                <div class="watch-icon">◐</div>
-                <h3 class="watch-name">VELOCITY</h3>
-                <p class="watch-desc">Swiss automatic movement with 72-hour power reserve. Crafted for those who chase horizons.</p>
+    <section id="heritage" class="heritage">
+        <div class="heritage-content">
+            <div class="heritage-text">
+                <h2>A CENTURY OF<br>EXCELLENCE</h2>
+                <p>Since 1923, AEON has been at the forefront of horological innovation. Our master watchmakers blend traditional craftsmanship with cutting-edge technology, creating timepieces that transcend generations.</p>
+                <p>Each watch is assembled by hand in our Swiss atelier, where passion meets precision. From the first sketch to the final polish, every detail is obsessed over, ensuring that when you wear an AEON, you wear a piece of history.</p>
+                
+                <div class="heritage-stats">
+                    <div class="stat-box">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Years of Mastery</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Hours Per Watch</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">18</div>
+                        <div class="stat-label">Master Artisans</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">∞</div>
+                        <div class="stat-label">Timeless Legacy</div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="watch-card">
-            <div class="watch-card-content">
-                <div class="watch-icon">◑</div>
-                <h3 class="watch-name">ZENITH</h3>
-                <p class="watch-desc">Titanium case with sapphire crystal. A masterpiece of engineering and elegance.</p>
-            </div>
-        </div>
-        <div class="watch-card">
-            <div class="watch-card-content">
-                <div class="watch-icon">◒</div>
-                <h3 class="watch-name">ECLIPSE</h3>
-                <p class="watch-desc">Limited edition chronograph. Where darkness meets light in perfect harmony.</p>
+
+            <div class="heritage-visual">
+                <div class="heritage-circle"></div>
+                <div class="heritage-circle"></div>
+                <div class="heritage-circle"></div>
             </div>
         </div>
     </section>
 
-    <section id="craft" class="features">
-        <h2 class="section-title">CRAFTSMANSHIP</h2>
-        <div class="feature-grid">
-            <div class="feature-item">
-                <div class="feature-number">300</div>
-                <p class="feature-text">Hours of meticulous assembly by master watchmakers</p>
+    <section id="testimonials" class="testimonials">
+        <div class="section-header">
+            <h2 class="section-title">TESTIMONIALS</h2>
+            <p class="section-subtitle">Stories from Our Collectors</p>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="quote-icon">"</div>
+                <p class="testimonial-text">The Imperial has become my most treasured possession. The craftsmanship is unparalleled, and every glance at my wrist reminds me that true artistry never fades.</p>
+                <div class="testimonial-author">ALEXANDER HARTFORD</div>
+                <div class="testimonial-role">Art Collector, London</div>
             </div>
-            <div class="feature-item">
-                <div class="feature-number">100M</div>
-                <p class="feature-text">Water resistance for every adventure life brings</p>
+
+            <div class="testimonial-card">
+                <div class="quote-icon">"</div>
+                <p class="testimonial-text">I've collected timepieces for over 30 years, and AEON represents the pinnacle of what a watch can be. It's not just about telling time—it's about preserving moments.</p>
+                <div class="testimonial-author">SOPHIA MARTINEZ</div>
+                <div class="testimonial-role">Entrepreneur, New York</div>
             </div>
-            <div class="feature-item">
-                <div class="feature-number">∞</div>
-                <p class="feature-text">Timeless design that transcends fleeting trends</p>
+
+            <div class="testimonial-card">
+                <div class="quote-icon">"</div>
+                <p class="testimonial-text">The Quantum exceeded every expectation. From the weight on my wrist to the intricate movement visible through the caseback, it's a constant reminder of human ingenuity.</p>
+                <div class="testimonial-author">JAMES WELLINGTON</div>
+                <div class="testimonial-role">Architect, Geneva</div>
             </div>
         </div>
     </section>
 
-    <footer id="contact" class="footer">
-        <p>© 2025 CHRONOS. CRAFTED WITH PRECISION.</p>
-    </footer>
-</body>
-</html>
+    <section class="newsletter">
+        <h2>JOIN THE LEGACY</h2>
+        <p>Be the first to discover new collections and exclusive releases</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+            <input type="email" placeholder="Your email address" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>AEON</h3>
+                <p style="color: #666; line-height: 1.8; font-size: 0.9rem;">Crafting eternal moments
